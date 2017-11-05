@@ -22,7 +22,6 @@ public class Utils {
 				
 				String[] list = line.split("\\s+");
 				
-				//Integer lookupPerson = lookupPerson(list[0], map);
 				String personName = list[0];
 				Person person = lookupPerson(personName, map);
 				if(person == null) {
@@ -43,33 +42,10 @@ public class Utils {
 		} catch (Exception e) {
 			throw new RuntimeException("Unable to read:" + filename, e);
 		}
-
-		// iterate second time to process list of friends
-//		counter = 1;
-//		try (BufferedReader reader = new BufferedReader(new FileReader(new File(filename)))) {
-//			String line;
-//			while ((line = reader.readLine()) != null) {
-//				if (line.startsWith("#"))
-//					continue; // it is a comment. do no read it.
-//				String[] list = line.split(" ");
-//				Person person = map.get(counter);
-//				for (int i = 1; i < list.length; i++) {
-//					String friend = list[i];
-//					Integer id = lookupPerson(friend, map);
-//					if (id != null) {
-//						person.addFriendId(id);
-//					}
-//				}
-//				counter++;
-//			}
-//		} catch (Exception e) {
-//			throw new RuntimeException("Unable to read:" + filename, e);
-//		}
-
 		return map;
 	}
 
-	private static Person lookupPerson(String name, Map<Integer, Person> map) {
+	public static Person lookupPerson(String name, Map<Integer, Person> map) {
 		for (Entry<Integer, Person> entry : map.entrySet()) {
 			if (name.equals(entry.getValue().name)) {
 				return entry.getValue();

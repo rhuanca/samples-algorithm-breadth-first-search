@@ -7,19 +7,33 @@ public class BreadthFirstSearch {
 	public static void main(String args[]) {
 		System.out.println("Program arguments: " + args);
 		String filename = args[0];
-		int source = Integer.parseInt(args[1]);
-		int destination = Integer.parseInt(args[2]);
+		String source = args[1];
+		String destination = args[2];
 
 		HashMap<Integer, Person> people = Utils.loadPeople(filename);
 
-		System.out.println("source: " + people.get(source));
-		System.out.println("dest: " + people.get(destination));
-		
-//		LinkedList<Person> persons = findPathBiBFS(people, source, destination);
-//		System.out.println("path:");
-//		for(Person person: persons) {
-//			System.out.println("\t"+person.name);
+//		for (Person person : people.values()) {
+//			System.out.println(person.name);
+//			for(Integer friendId: person.friends) {
+//				System.out.println("\t"+people.get(friendId).name);
+//			}
 //		}
+		
+		Person sourcePerson = Utils.lookupPerson(source, people);
+		Person destPerson = Utils.lookupPerson(destination, people);
+		
+		if(sourcePerson==null || destPerson==null) {
+			throw new IllegalArgumentException("source or destination parameters are invalid");
+		}
+		
+		System.out.println("source: " + sourcePerson.name);
+		System.out.println("dest: " + destPerson.name);
+		
+		LinkedList<Person> persons = findPathBiBFS(people, sourcePerson.id, destPerson.id);
+		System.out.println("path:");
+		for(Person person: persons) {
+			System.out.println("\t"+person.name);
+		}
 	}
 
 	public static LinkedList<Person> findPathBiBFS(HashMap<Integer, Person> people, Integer source, Integer destination) {
@@ -30,15 +44,12 @@ public class BreadthFirstSearch {
 			/* search out from source */
 			Person collision = searchLevel(people, sourceData, destData);
 			
-			System.out.println(">>> collision1 = " + collision);
-			
 			if(collision!=null) {
 				return mergePaths(sourceData, destData, collision.id);
 			}
 			
 			/* search out from destination */
 			collision = searchLevel(people, destData, sourceData);
-			System.out.println(">>> collision2 = " + collision);
 			
 			if(collision != null) {
 				return mergePaths(sourceData, destData, collision.id);
