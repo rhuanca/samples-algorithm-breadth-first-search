@@ -1,0 +1,14 @@
+# list of a person and it's friends.
+# first element on a line is the name of the person
+# the rest in the line are it's friend.
+# It is possible to repeat names with different list of friends
+# in this case the friends will be just added to the original list.
+ 
+renan jacky clara
+jacky clara 
+clara jorge tio-carlos tia-juana jimmy monica
+jimmy jorge clara
+monica orietha
+orieta beto
+beto renan yazi
+yazi orietha beto
