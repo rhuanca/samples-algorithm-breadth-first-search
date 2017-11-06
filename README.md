@@ -6,4 +6,4 @@ The main clas is BreadthFirstSearch
 
 the way to call it is:
 
-java BreadthFirstSearch <filename> <sourcePersonName> <destinationPersonName>
+java BreadthFirstSearch filename sourcePersonName destinationPersonName
